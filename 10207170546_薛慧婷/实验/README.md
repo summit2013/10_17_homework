@@ -13,6 +13,6 @@
 实验报告
 
 <ol>
-<li>实验一：Linux命令及虚拟机<li>
-<li>实验二：Linux下的C++开发<li>
+<li>实验一：Linux命令及虚拟机</li>
+<li>实验二：Linux下的C++开发</li>
 </ol>
