@@ -1,0 +1,363 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ddd
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            
+        }
+       
+        public void GrawLine(PaintEventArgs e)
+        {
+            int a = this.Height;
+            int b = this.Width;
+            Pen p = new Pen(Color.Black, 6);
+            Graphics g = this.CreateGraphics();
+            p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+            g.DrawLine(p, 20, a - 105, 20, 10);//y轴
+            g.DrawLine(p, 5, a - 130, b - 15, a - 130);//x轴
+            p.Dispose();
+        }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            GrawLine(e);
+        }
+
+
+
+        private void Form1_Load(object sender, EventArgs e) 
+         {
+           
+        }
+        
+      
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int a = this.Height;
+            int b = this.Width;
+            Pen p = new Pen(Color.Black, 6);
+            Graphics g = this.CreateGraphics();
+            p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+            g.DrawLine(p, 20, a -105, 20, 10);//y轴
+            g.DrawLine(p, 5, a - 130, b - 15, a - 130);//x轴
+            p.Dispose();
+        }
+
+       
+        int A;
+       public  void textBox1_TextChanged(object sender, EventArgs e)
+       {
+         
+
+        }
+       int B;
+        public  void textBox2_TextChanged(object sender, EventArgs e)
+        {
+           
+            
+        }
+        int C;
+        public  void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+         
+           
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text == string.Empty || textBox2.Text == string.Empty || textBox3.Text == string.Empty)
+            {
+                MessageBox.Show("输入框不能为空");
+            }
+            else
+            {
+                try
+                {
+                    A = Convert.ToInt32(textBox1.Text);
+                    B = Convert.ToInt32(textBox2.Text);
+                    C = Convert.ToInt32(textBox3.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("你输入的不是整数。");
+                    textBox1.Text = string.Empty;
+                    textBox2.Text = string.Empty;
+                    textBox3.Text = string.Empty;
+                    return;
+                }
+                label4.Text = "A";
+                label5.Text = "B";
+                label6.Text = "C";
+
+                int z,z1;
+                z = A + B + C;
+                z1=A+B;
+                int h = this.Height;
+                int w = this.Width;
+                Graphics bt = this.CreateGraphics();
+                Pen pa = new Pen(Color.Red, 3);
+                bt.DrawLine(pa, 22, 68, A * w / z + 12, 68);
+                pa.Dispose();
+                Pen pb = new Pen(Color.Blue, 3);
+                bt.DrawLine(pb, A * w / z + 12, 170, A * w / z + 12 + B * w / z, 170);
+                pb.Dispose();
+                Pen pc = new Pen(Color.Yellow, 3);
+                bt.DrawLine(pc, A * w / z + 12 + B * w / z, 260, A * w / z + 12 + B * w / z + C * w / z, 260);
+                string A1 = A.ToString();
+                string B1 = z1.ToString();
+                string C1 = z.ToString();
+                textBox4.Text = A1;
+                textBox5.Text = B1;
+                textBox6.Text = C1;
+            }
+          
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = string.Empty;
+            textBox2.Text = string.Empty;
+            textBox3.Text = string.Empty;
+            textBox4.Text = string.Empty;
+            textBox5.Text = string.Empty;
+            textBox6.Text = string.Empty;
+            Graphics c = this.CreateGraphics();
+            c.Clear(this.BackColor);
+            button1_Click(sender, e);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (textBox1.Text == string.Empty || textBox2.Text == string.Empty || textBox3.Text == string.Empty)
+            {
+                MessageBox.Show("输入框不能为空");
+            }
+            else
+            {
+                try
+                {
+                    A = Convert.ToInt32(textBox1.Text);
+                    B = Convert.ToInt32(textBox2.Text);
+                    C = Convert.ToInt32(textBox3.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("你输入的不是整数。");
+                    textBox1.Text = string.Empty;
+                    textBox2.Text = string.Empty;
+                    textBox3.Text = string.Empty;
+                    return;
+                }
+                int z;
+                z = A + B + C;
+                int z2;
+                string A2 = A.ToString();
+               
+                string C1 = z.ToString();
+                if ((A > B)|(A==B))
+                {
+
+                    if (B > C)
+                    {
+                        z2 = C + B;
+                        string C2 = C.ToString();
+                        string B2 = z2.ToString();
+                        textBox4.Text = C1;
+                        textBox5.Text = B2;
+                        textBox6.Text = C2;
+
+                    }
+                    else if (C > B)
+                    {
+
+                        if (A > C)
+                        {
+                            z2 = B + C;
+                            string B3 = B.ToString();
+                            string B2 =z2.ToString();
+                            textBox4.Text = C1;
+                            textBox5.Text = B3;
+                            textBox6.Text = B2;
+                        }
+                        else if (A < C)
+                        {
+                            z2 = A + B;
+                            string B3 = B.ToString();
+                            string B2 = z2.ToString();
+                            textBox4.Text = B2;
+                            textBox5.Text = B3;
+                            textBox6.Text = C1;
+                        }
+                    }
+                    else if (A < C)
+                    {
+                        z2 = A + B;
+                        string B3 = B.ToString();
+                        string B2 = z2.ToString();
+                        textBox4.Text = B2;
+                        textBox5.Text = B3;
+                        textBox6.Text = C1;
+                    }
+                }
+                else if (A < B)
+                {
+                    if (A > C)
+                    {
+                        z2 = A + C;
+                        String C2 = C.ToString();
+                        string B2 = z2.ToString();
+                        textBox4.Text = B2;
+                        textBox5.Text = C1;
+                        textBox6.Text = C2;
+                    }
+                    else if (A < C)
+                    {
+                        if (B > C)
+                        {
+                            z2 = A + C;
+                            string B2 = z2.ToString();
+                            textBox4.Text = A2;
+                            textBox5.Text = C1;
+                            textBox6.Text = B2;
+                        }
+                        else if (B < C)
+                        {
+                            z2 = A + B;
+                            string B2 = z2.ToString();
+                            textBox4.Text = A2;
+                            textBox5.Text = B2;
+                            textBox6.Text = C1;
+                        }
+                    }
+                    else if (B < C)
+                    {
+                        z2 = A + B;
+                        string B2 = z2.ToString();
+                        textBox4.Text = A2;
+                        textBox5.Text = B2;
+                        textBox6.Text = C1;
+                    }
+                }
+               
+
+               
+                int h = this.Height;
+                int w = this.Width;
+      
+                int n;
+                if (A > B)
+                {
+                    
+                    if (B > C)
+                    {
+                        label4.Text = "C";
+                        label5.Text = "B";
+                        label6.Text = "A";
+                        n = C;
+                        C = A;
+                        A = n;
+
+                    }
+                    else if (C > B)
+                    {
+
+                        if (A > C)
+                        {
+                            n = B;
+                            B = C;
+                            C = A;
+                            A = n;
+                            label4.Text = "B";
+                            label5.Text = "C";
+                            label6.Text = "A";
+                        }
+                        else if (A < C)
+                        {
+                            n = B;
+                            B = A;
+                            A = n;
+                            label4.Text = "B";
+                            label5.Text = "A";
+                            label6.Text = "C";
+                        }
+                    }
+                    else if (A < C)
+                    {
+                        n = B;
+                        B = A;
+                        A = n;
+                        label4.Text = "B";
+                        label5.Text = "A";
+                        label6.Text = "C";
+                    }
+                }
+                else if (A < B)
+                {
+                    if (A > C)
+                    {
+                        n = C;
+                        C = B;
+                        B = A;
+                        A = n;
+                        label4.Text = "C";
+                        label5.Text = "A";
+                        label6.Text = "B";
+                    }
+                    else if (A < C)
+                    {
+                        if (B > C)
+                        {
+                            n = C;
+                            C = B;
+                            B = n;
+                            label4.Text = "A";
+                            label5.Text = "C";
+                            label6.Text = "B";
+                        }
+                        else if (B < C)
+                        {
+                         
+                            label4.Text = "A";
+                            label5.Text = "B";
+                            label6.Text = "C";
+                        }
+                    }
+                    else if (B < C)
+                    {
+                      
+                        label4.Text = "A";
+                        label5.Text = "B";
+                        label6.Text = "C";
+                    }
+                }
+                Graphics bt = this.CreateGraphics();
+                Pen pa = new Pen(Color.Red, 3);
+                bt.DrawLine(pa, 22, 68, A * w / z + 12, 68);
+                pa.Dispose();
+                Pen pb = new Pen(Color.Blue, 3);
+                bt.DrawLine(pb, A * w / z + 12, 170, A * w / z + 12 + B * w / z, 170);
+                pb.Dispose();
+                Pen pc = new Pen(Color.Yellow, 3);
+                bt.DrawLine(pc, A * w / z + 12 + B * w / z, 260, A * w / z + 12 + B * w / z + C * w / z, 260);
+  
+            }
+          
+        }
+    }
+}
