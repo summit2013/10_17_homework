@@ -1,0 +1,158 @@
+
+1.程序
+
+#include <iostream>
+int main()
+{ int n;
+  int ArrivalTime,ServiceTime,i;
+   cout<<"请输入进程总的个数n(n整数且0<n<=100):"<<endl;
+   cin>>n;
+ while(n<1)
+{
+  cout<<"输入的n值不合适，请重新输入!"<<endl;
+  cin>>n;
+}
+   cout<<"请按照进程到达的时间从小到大依次输入n个进程的到达时间，以空格隔开:"<<endl;
+ for(int i=0;i<n;i++)
+{
+   cin>>ArrivalTime[i];
+}
+ cout<<"请按照进程到达的时间从小到大依次输入n个进程的服务时间，以空格隔开:"<<endl;
+ for(int i=0;i<n;i++)
+{
+   cin>>ServiceTime[i];
+}
+   FCFS(ArrivalTime,ServiceTime,n);//调用FCFS子程序
+   SJF(ArrivalTime,ServiceTime,n);//调用SJF子程序
+ return 0;
+}
+void FCFS(int*ArrivalTime,int*ServiceTime,int n)
+{
+   int FinishTime,WholeTime,WeightWholeTime,AverageWT_FCFS, AverageWWT_FCFS;
+   FinishTime[0]=ArrivalTime[0]+ServiceTime[0];
+   WholeTime[0]=FinishTime[0]-ArrivalTime[0];
+   WeightWholeTime[0]=WholeTime[0]/ServiceTime[0];
+   AverageWT_FCFS= WholeTime[0];
+   AverageWWT_FCFS=WeightWholeTime[0];
+ for(int i=0;i<n;i++)
+{
+   if(FinishTime[i-1]>ArrivalTime[i]||FinishTime[i-1]==ArrivalTime[i])
+      FinishTime[i]=FinishTime[i-1]+SeviceTime[i];
+     else
+         FinishTime[i]=ArrivalTime[i]+SeviceTime[i];
+         WholeTime[i]=FinishTime[i]-ArrivalTime[i];
+         WeightWholeTime[i]= WholeTime[i]/SeviceTime[i];
+         AverageWT_FCFS+=WholeTime[i];
+         AverageWWT_FCFS+=WeightWholeTime[i];
+}
+  AverageWT_FCFS/=n;//求FCFS的平均周转时间
+  AverageWWT_FCFS/=n;//求FCFS的平均带权周转时间
+  cout<<endl;
+  cout<<"完成时间为:";
+  cout<<"周转时间为:";
+  cout<<"帯权周转时间为:";
+  cout<<endl;
+  for(int i=0;i<n;i++)
+{
+  cout<<FinishTime[i]<<" "<<endl;
+  cout<<WholeTime[i]<<" "<<endl;
+  cout<<WeightWholeTime[i]<<" "<<endl;
+}
+  cout<<"FCFS平均周转时间为:"<<AverageWT_FCFS<<endl;
+  cout<<"FCFS平均带权周转时间为:"<<AverageWWT_FCFS<<endl;
+}
+void SJF(int*ArrivalTime,int*ServiceTime,int n)
+{  
+  int FinishTime,WholeTime,WeightWholeTime,AverageWT_SJF, AverageWWT_SJF;
+  int end[i];//用于标记进程i是否已经执行，已执行，则end[i]=1;否则end[i]=0
+   for(int k=0;k<n;k++)
+{
+      end[k]=0;
+}
+   int temp,now,next=1,p=1;//now表示刚执行完的进程，next表示下一个要执行的进程号
+      FinishTime[0]=ArrivalTime[0]+SeviceTime[0]; 
+      WholeTime[0]=FinishTime[0]-ArrivalTime[0];
+      WeightWholeTime[0]= WholeTime[0]/SeviceTime[0];
+      AverageWT_SJF=WholeTime[0];
+      AverageWWT_SJF=WeightWholeTime[0];
+   now=0;
+   end[now]=1;//执行完的进程设置为1
+   for(int i=0;i<n;i++)
+       intj;
+   for(j=1;j<n)//判断第now个进程执行完时，到达的最后一个进程的号码，用temp表示
+{
+   if(ArrivalTime[j]<FinishTime[now]||ArrivalTime[j]==FinishTime[now])
+     {
+       j++;
+     }
+    else
+        break;
+}
+   temp=j;
+   int min=p;
+   for(int j=1;j<=temp;j++)//寻找下一个要执行的进程next
+     {
+       if(ServiceTime[min]>ServiceTime[j]&&end[j]=0)
+         {
+           min=j;
+         }
+     }
+   next=min;//执行第next个进程
+     FinishTime[next]=FinishTime[now]+SeviceTime[next]; 
+     WholeTime[next]=FinishTime[next]-ArrivalTime[next];
+     WeightWholeTime[next]= WholeTime[next]/SeviceTime[next];
+     AverageWT_SJF+=WholeTime[next];
+     AverageWWT_SJF+=WeightWholeTime[next];
+     end[next]=1;
+     now=next;
+     next=p;
+   while(end[p]!=0)
+{
+  p++;
+}
+  AverageWT_SJF/=n;//求SJF的平均周转时间
+  AverageWWT_SJF/=n;//求SJF的平均带权周转时间 
+  cout<<endl;
+  cout<<"完成时间为:";
+  cout<<"周转时间为:";
+  cout<<"帯权周转时间为:";
+  cout<<endl;
+  for(int i=0;i<n;i++)
+{
+  cout<<FinishTime[i]<<" "<<endl;
+  cout<<WholeTime[i]<<" "<<endl;
+  cout<<WeightWholeTime[i]<<" "<<endl;
+}
+  cout<<"FCFS平均周转时间为:"<<AverageWT_SJF<<endl;
+  cout<<"FCFS平均带权周转时间为:"<<AverageWWT_SJF<<endl;
+}
+
+
+2.计算调度时间和周转时间
+ 
+作业情况     进程名         A     B     C     D     E       平均时间
+
+调度算法    到达时间        0     1     2     3     4
+            
+            服务时间        4     3     5     2     4
+
+  
+  FCFS      完成时间        4     7     12    14    18
+            
+            周转时间        4     6     10    11    14        9
+
+            帯权周转时间    1     2     2     5.5   3.5       2.8
+
+  
+  SJF       完成时间        4     9     18    6     13
+              
+            周转时间        4     8     16    3     9         8
+
+            帯权周转时间    1     2.67  3.1   1.5   2.25      2.104
+
+
+
+      
+
+  
+
