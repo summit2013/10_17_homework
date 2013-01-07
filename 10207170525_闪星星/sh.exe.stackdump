@@ -6,9 +6,9 @@ cs=001B ds=0023 es=0023 fs=003B gs=0000 ss=0023
 Stack trace:
 Frame     Function  Args
 0022F44C  68001FE4  (0022F8C0, E1834000, 01CDEC26, DBB71000)
-0022F46C  680022D9  (0022F61C, 00000000, 58454853, 2E317E45)
+0022F46C  680022D9  (0022F61C, 00000000, E48796E6, 8BE6B6BB)
 0022F48C  6801366A  (0022F8C0, 00000000, 00110000, 00000000)
 0022F900  6805E455  (00000001, 0A016330, 0000000D, 0A016330)
 6805B0D4  0A016078  (F2890873, 000001B8, C10FF000, C1894002)
-1049337 [main] sh.exe" 6944 handle_exceptions: Exception: STATUS_ACCESS_VIOLATION
-1071360 [main] sh.exe" 6944 handle_exceptions: Error while dumping state (probably corrupted stack)
+ 950044 [main] sh.exe" 6712 handle_exceptions: Exception: STATUS_ACCESS_VIOLATION
+ 972024 [main] sh.exe" 6712 handle_exceptions: Error while dumping state (probably corrupted stack)
