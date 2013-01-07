@@ -23,12 +23,19 @@ namespace WindowsFormsApplication1
 
         public void fcfs()
         {
-            int sumztime;
-            int sumdqtime;
+            int sumztime=0;
+            int sumdqtime=0;
             job[] j = { new job(1,2),new job(1,2),new job(1,2)};
-            for (int i = 0; i < 3; i++)
-            {
-                
+            
+            j[0].ftime = j[0].ctime + j[0].stime;
+            sumztime = j[0].ftime;
+
+            for (int i = 1; i < 3; i++)
+            {                
+                j[i].ftime = j[i-1].ftime + j[i].stime;
+                j[i].f();
+                sumztime += j[i].ftime;
+                sumdqtime += j[i].dqtime;
             }
             
         }
