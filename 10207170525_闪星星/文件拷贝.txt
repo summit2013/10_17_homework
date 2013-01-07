@@ -1,3 +1,4 @@
+ДњТы
 #include "stdafx.h"
 #include <windows.h>
 #include <iostream>
