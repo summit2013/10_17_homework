@@ -21,7 +21,7 @@ namespace WindowsFormsApplication1
 
         }
 
-        public void fcfs()
+        public static void  fcfs()
         {
             int sumztime=0;
             int sumdqtime=0;
@@ -37,8 +37,18 @@ namespace WindowsFormsApplication1
                 sumztime += j[i].ftime;
                 sumdqtime += j[i].dqtime;
             }
+            sumztime = sumztime / 3;
+            sumdqtime = sumdqtime / 3;
+
+            
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
             
         }
+
     }
 
     public class job
