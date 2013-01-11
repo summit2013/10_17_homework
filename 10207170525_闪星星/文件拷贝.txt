@@ -1,0 +1,26 @@
+#include "stdafx.h"
+#include <windows.h>
+#include <iostream>
+using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+    SHFILEOPSTRUCT sf;
+    memset(&sf,0,sizeof(sf));
+    sf.hwnd = 0;
+    sf.wFunc = FO_COPY;
+    sf.pFrom = _T("D:\\testfrom");
+    sf.pTo = _T("D:\\testto");
+    sf.fFlags = FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_NOERRORUI;
+    int n = SHFileOperation(&sf);
+    if( n == 0)
+    {
+        cout << "Success\n";
+    }
+    else
+    {
+        cout << "Failed\n";
+    }
+
+	return 0;
+}
