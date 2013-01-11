@@ -1,0 +1,89 @@
+  #include<stdio.h>
+  #include<unistd.h>
+  main( )
+  {
+    int p1,p2; //定义两个进程号变量
+    while((p1=fork())==-1); //循环创建进程直至成功为止
+    if (p1==0)               //子进程创建成功
+       putchar(‘b’);
+    else
+      {
+	while((p2=fork())==-1);   //创建另一个子进程
+	if (p2==0)                //子进程创建成功
+	   putchar(‘c’);
+	else
+	   putchar(‘a’);       //父进程执行
+       }
+    }
+ 运行结果：bca或bac
+ 分析：fork（）创建进程需要的时间比输出一个字符长，所以在主进程创建进程2的同时进程1就输出了b，
+       而进程2和主进程的输出次序是随机的。
+
+
+  #include<stdio.h>
+  #include<unistd.h>
+  main( )
+  {
+    int p1,p2，i; 
+    while((p1=fork())==-1); 
+    if (p1==0)              
+       for(i=0;i<500;i++)
+	   printf(“son%d\n”,i);
+    else
+      {
+	while((p2=fork())==-1);   
+	if (p2==0)                
+	   for(i=0;i<500;i++)
+	       printf(“daughter%d\n”,i);
+	else
+	   for(i=0;i<500;i++)
+	       printf(“father%d\n”,i);     
+       }
+    }
+ 运行结果：son... 
+           daughter...
+           father...
+           daughter...
+         或son...
+           daughter...
+           son...
+           father... 
+ 分析：由于输出的字符串之间不会被中断，因此字符串内部的字符顺序输出时不变。但是，由于并发执行时调度顺序和父子进程抢占
+       处理机的问题，输出字符串的先后顺序会随着执行时间的不同而变化。
+
+
+   #include<stdio.h>
+   #include<unistd.h>
+   main( )
+   {
+     int p1,p2，i; 
+     while((p1=fork())==-1); 
+     if (p1==0)
+     {  
+       lockf(1,1,0);            
+       for(i=0;i<500;i++)
+	   printf(“son%d\n”,i);
+       lockf(1,0,0);
+      } 
+     else
+       {
+	 while((p2=fork())==-1);   
+	 if (p2==0) 
+          {
+            lockf(1,1,0);                
+	    for(i=0;i<500;i++)
+	       printf(“daughter%d\n”,i);
+            lockf(1,0,0);
+           } 
+	 else
+           {
+            lockf(1,1,0); 
+	    for(i=0;i<500;i++)
+	       printf(“father%d\n”,i);
+            lockf(1,0,0);
+           }      
+        }
+    }
+  运行结果:与上一程序的结果大致相同
+  分析：不同进程之间执行时不存在共享临界资源的问题，所以加锁与不加锁效果一样。
+    
