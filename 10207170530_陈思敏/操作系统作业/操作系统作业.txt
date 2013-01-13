@@ -1,0 +1,23 @@
+#include<windows.h>
+BOOL APIENTRY DllMain(HANDLE hModule,DWORD ul_reason_for_call,LPVOID lpReserved)
+{
+return TRUE;
+}
+extern"C"_declspec(dllexport)int MyCopyfile(LPCSTR src,LPCSTR tar)
+{
+if(CopyFile(src,tar,FALSE)==TRUE)
+{
+return 1;
+}
+else 
+{
+return 0;
+}
+}
+int main()
+{
+int argc;
+char * argv;
+MyCopyFile("C:\Users\min\Desktop\桌面文件", " E:\学习附件");
+return 0;
+}
