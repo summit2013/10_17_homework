@@ -1,0 +1,73 @@
+using namespace std;
+int WINAPI  Winmain()
+{
+	HANDLE   hFolder;
+ Copy CopyFolder( "C:\\360Rec\n", " E:\\学习附件\n", false);
+if（copysuccess==CopyFolder()）
+        cout<<”拷贝失败，错误代码为：”<<GetLastError<<endl；
+         else
+	 {
+         cout<<“文件夹拷贝成功”<<endl；
+	 }
+ return 0；
+}
+
+
+	int CopyFolder(char SourceFolderName[MAX_PATH],char DestFolderName[MAX_PATH],bool copysuccess)
+	{
+		char   temp[MAX_PATH]   =   path; 
+        strcat(temp, "\\*.* "） 
+        hfolder  =   FindFirstFolder(temp,   &FindData); 
+        if(hFolder  ！=   INVALID_HANDLE_VALUE) 
+           {       
+             do{ 
+                 if(!strcmp(FindData.cFolderName,   ". ")||   !strcmp(FindData.cFolderName,   ".. ")）
+                          continue;   
+if(FindData.dwFolderAttributes&FOLDER_ATTRIBUTE_DIRECTORY   )
+{ 
+       
+                          strcpy(temp,path); 
+                          strcat(temp, "\\ "); 
+                          strcat(temp,FindData.cFolderName); 
+                          SearchDir(temp); 
+} 
+else 
+                  { 
+					  cout<<"the foldername is:"<<temp<<endl;
+                    } 
+          }
+			 while(FindNextFolde(hFile,&FindData)); 
+          FindClose(hFolder); 
+          return   true; 
+} 
+else 
+{   return   false; 
+} 
+
+
+	}
+
+程序二:
+#include<windows.h>
+BOOL APIENTRY DllMain(HANDLE hModule,DWORD ul_reason_for_call,LPVOID lpReserved)
+{
+return TRUE;
+}
+extern"C"_declspec(dllexport)int MyCopyfile(LPCSTR src,LPCSTR tar)
+{
+if(CopyFile(src,tar,FALSE)==TRUE)
+{
+return 1;
+}
+else 
+{
+return 0;
+}
+}
+int main()
+{
+int argc;
+char * argv;
+MyCopyFile("C:\Users\min\Desktop\桌面文件", " E:\学习附件");
+return 0;
+}
